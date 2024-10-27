@@ -85,6 +85,15 @@ multiImages:
     changeFiles:
       - dockerfile-kasm-libre-office
       - src/ubuntu/install/libre_office/**
+  - name: nessus
+    singleapp: false
+    base: core-ubuntu-focal
+    dockerfile: dockerfile-kasm-nessus
+    changeFiles:
+      - dockerfile-kasm-nessus
+      - src/ubuntu/install/chromium/**
+      - src/ubuntu/install/nessus/**
+      - src/ubuntu/install/cleanup/**
   - name: opensuse-15-desktop
     singleapp: false
     base: core-opensuse-15
@@ -175,6 +184,7 @@ multiImages:
     changeFiles:
       - dockerfile-kasm-telegram
       - src/ubuntu/install/telegram/**
+      - src/ubuntu/install/chrome/**
   - name: terminal
     singleapp: false
     base: core-ubuntu-focal
@@ -281,6 +291,33 @@ multiImages:
       - src/ubuntu/install/ansible/**
       - src/ubuntu/install/chrome/**
       - src/ubuntu/install/slack/**
+  - name: ubuntu-noble-desktop
+    singleapp: false
+    base: core-ubuntu-noble
+    dockerfile: dockerfile-kasm-ubuntu-noble-desktop
+    changeFiles:
+      - dockerfile-kasm-ubuntu-noble-desktop
+      - src/ubuntu/install/zoom/**
+      - src/ubuntu/install/vs_code/**
+      - src/ubuntu/install/tools/**
+      - src/ubuntu/install/thunderbird/**
+      - src/ubuntu/install/terraform/**
+      - src/ubuntu/install/telegram/**
+      - src/ubuntu/install/sublime_text/**
+      - src/ubuntu/install/signal/**
+      - src/ubuntu/install/remmina/**
+      - src/ubuntu/install/only_office/**
+      - src/ubuntu/install/obs/**
+      - src/ubuntu/install/nextcloud/**
+      - src/ubuntu/install/misc/**
+      - src/ubuntu/install/gimp/**
+      - src/ubuntu/install/gamepad_utils/**
+      - src/ubuntu/install/firefox/**
+      - src/ubuntu/install/cleanup/**
+      - src/ubuntu/install/chromium/**
+      - src/ubuntu/install/ansible/**
+      - src/ubuntu/install/chrome/**
+      - src/ubuntu/install/slack/**
   - name: vlc
     singleapp: true
     base: core-ubuntu-focal
@@ -295,6 +332,7 @@ multiImages:
     changeFiles:
       - dockerfile-kasm-vs-code
       - src/ubuntu/install/vs_code/**
+      - src/ubuntu/install/chrome/**
   - name: almalinux-8-desktop
     singleapp: false
     base: core-almalinux-8
@@ -346,6 +384,15 @@ multiImages:
     dockerfile: dockerfile-kasm-alpine-319-desktop
     changeFiles:
       - dockerfile-kasm-alpine-319-desktop
+      - src/ubuntu/install/langpacks/**
+      - src/ubuntu/install/cleanup/**
+      - src/alpine/install/**
+  - name: alpine-320-desktop
+    singleapp: false
+    base: core-alpine-320
+    dockerfile: dockerfile-kasm-alpine-320-desktop
+    changeFiles:
+      - dockerfile-kasm-alpine-320-desktop
       - src/ubuntu/install/langpacks/**
       - src/ubuntu/install/cleanup/**
       - src/alpine/install/**
@@ -407,38 +454,25 @@ multiImages:
       - src/ubuntu/install/ansible/**
       - src/ubuntu/install/chrome/**
       - src/ubuntu/install/slack/**
-  - name: fedora-37-desktop
-    singleapp: false
-    base: core-fedora-37
-    dockerfile: dockerfile-kasm-fedora-37-desktop
-    changeFiles:
-      - dockerfile-kasm-fedora-37-desktop
-      - src/oracle/install/**
-      - src/ubuntu/install/thunderbird/**
-      - src/ubuntu/install/remmina/**
-      - src/ubuntu/install/firefox/**
-      - src/ubuntu/install/cleanup/**
-      - src/ubuntu/install/chromium/**
-      - src/ubuntu/install/slack/**
-  - name: fedora-38-desktop
-    singleapp: false
-    base: core-fedora-38
-    dockerfile: dockerfile-kasm-fedora-38-desktop
-    changeFiles:
-      - dockerfile-kasm-fedora-38-desktop
-      - src/oracle/install/**
-      - src/ubuntu/install/thunderbird/**
-      - src/ubuntu/install/remmina/**
-      - src/ubuntu/install/firefox/**
-      - src/ubuntu/install/cleanup/**
-      - src/ubuntu/install/chromium/**
-      - src/ubuntu/install/slack/**
   - name: fedora-39-desktop
     singleapp: false
     base: core-fedora-39
     dockerfile: dockerfile-kasm-fedora-39-desktop
     changeFiles:
       - dockerfile-kasm-fedora-39-desktop
+      - src/oracle/install/**
+      - src/ubuntu/install/thunderbird/**
+      - src/ubuntu/install/remmina/**
+      - src/ubuntu/install/firefox/**
+      - src/ubuntu/install/cleanup/**
+      - src/ubuntu/install/chromium/**
+      - src/ubuntu/install/slack/**
+  - name: fedora-40-desktop
+    singleapp: false
+    base: core-fedora-40
+    dockerfile: dockerfile-kasm-fedora-40-desktop
+    changeFiles:
+      - dockerfile-kasm-fedora-40-desktop
       - src/oracle/install/**
       - src/ubuntu/install/thunderbird/**
       - src/ubuntu/install/remmina/**
@@ -455,6 +489,14 @@ multiImages:
       - src/ubuntu/install/firefox/**
       - src/ubuntu/install/cleanup/**
       - src/ubuntu/install/chromium/**
+  - name: maltego
+    singleapp: true
+    base: core-ubuntu-focal
+    dockerfile: dockerfile-kasm-maltego
+    changeFiles:
+      - dockerfile-kasm-maltego
+      - src/ubuntu/install/maltego/**
+      - src/ubuntu/install/firefox/**
   - name: minetest
     singleapp: true
     base: core-ubuntu-focal
@@ -487,7 +529,7 @@ multiImages:
       - src/ubuntu/install/chromium/**
   - name: retroarch
     singleapp: true
-    base: core-ubuntu-focal
+    base: core-ubuntu-jammy
     dockerfile: dockerfile-kasm-retroarch
     changeFiles:
       - dockerfile-kasm-retroarch
@@ -583,6 +625,35 @@ multiImages:
       - src/ubuntu/install/cleanup/**
       - src/ubuntu/install/chromium/**
       - src/ubuntu/install/chrome/**
+  - name: ubuntu-noble-dind
+    singleapp: false
+    base: core-ubuntu-noble
+    dockerfile: dockerfile-kasm-ubuntu-noble-dind
+    changeFiles:
+      - dockerfile-kasm-ubuntu-noble-dind
+      - src/ubuntu/install/vs_code/**
+      - src/ubuntu/install/tools/**
+      - src/ubuntu/install/sublime_text/**
+      - src/ubuntu/install/misc/**
+      - src/ubuntu/install/dind/**
+      - src/ubuntu/install/cleanup/**
+      - src/ubuntu/install/chromium/**
+      - src/ubuntu/install/chrome/**
+  - name: ubuntu-noble-dind-rootless
+    singleapp: false
+    base: core-ubuntu-noble
+    dockerfile: dockerfile-kasm-ubuntu-noble-dind-rootless
+    changeFiles:
+      - dockerfile-kasm-ubuntu-noble-dind-rootless
+      - src/ubuntu/install/vs_code/**
+      - src/ubuntu/install/vs_code/**
+      - src/ubuntu/install/tools/**
+      - src/ubuntu/install/sublime_text/**
+      - src/ubuntu/install/misc/**
+      - src/ubuntu/install/dind_rootless/**
+      - src/ubuntu/install/cleanup/**
+      - src/ubuntu/install/chromium/**
+      - src/ubuntu/install/chrome/**
   - name: vivaldi
     singleapp: true
     base: core-ubuntu-focal
@@ -593,13 +664,6 @@ multiImages:
       - src/ubuntu/install/certificates/**
       - src/ubuntu/install/vivaldi/**
 singleImages:
-  - name: atom
-    singleapp: true
-    base: core-ubuntu-focal
-    dockerfile: dockerfile-kasm-atom
-    changeFiles:
-      - dockerfile-kasm-atom
-      - src/ubuntu/install/atom/**
   - name: blender
     singleapp: true
     base: core-ubuntu-focal
@@ -607,16 +671,6 @@ singleImages:
     changeFiles:
       - dockerfile-kasm-blender
       - src/ubuntu/install/blender/**
-  - name: centos-7-desktop
-    singleapp: false
-    base: core-centos-7
-    dockerfile: dockerfile-kasm-centos-7-desktop
-    changeFiles:
-      - dockerfile-kasm-centos-7-desktop
-      - src/ubuntu/install/thunderbird/**
-      - src/ubuntu/install/firefox/**
-      - src/ubuntu/install/cleanup/**
-      - src/ubuntu/install/chrome/**
   - name: chrome
     singleapp: true
     base: core-ubuntu-focal
@@ -688,32 +742,32 @@ singleImages:
     changeFiles:
       - dockerfile-kasm-insomnia
       - src/ubuntu/install/insomnia/**
-  - name: maltego
-    singleapp: true
-    base: core-ubuntu-focal
-    dockerfile: dockerfile-kasm-maltego
-    changeFiles:
-      - dockerfile-kasm-maltego
-      - src/ubuntu/install/maltego/**
-      - src/ubuntu/install/firefox/**
   - name: only-office
     singleapp: true
     base: core-ubuntu-focal
     dockerfile: dockerfile-kasm-only-office
     changeFiles:
       - dockerfile-kasm-only-office
-  - name: oracle-7-desktop
+  - name: kasmos-desktop
     singleapp: false
-    base: core-oracle-7
-    dockerfile: dockerfile-kasm-oracle-7-desktop
+    base: core-kasmos
+    dockerfile: dockerfile-kasmos-desktop
     changeFiles:
-      - dockerfile-kasm-oracle-7-desktop
-      - src/oracle/install/**
-      - src/ubuntu/install/thunderbird/**
-      - src/ubuntu/install/remmina/**
-      - src/ubuntu/install/firefox/**
-      - src/ubuntu/install/cleanup/**
       - src/ubuntu/install/chrome/**
+      - src/ubuntu/install/chromium/**
+      - src/ubuntu/intall/only_office/**
+      - src/ubuntu/install/libre_office/**
+      - src/ubuntu/install/misc/**
+      - src/kasmos/install/browser/**
+      - src/ubuntu/install/vs_code/**
+      - src/ubuntu/install/nextcloud/**
+      - src/ubuntu/install/remmina/**
+      - src/kasmos/install/office/**
+      - src/ubuntu/install/zoom/**
+      - src/ubuntu/install/thunderbird/**
+      - src/ubuntu/install/slack/**
+      - src/ubuntu/install/gamepad_utils/**
+      - src/ubuntu/install/cleanup/**
   - name: postman
     singleapp: true
     base: core-ubuntu-focal
@@ -787,3 +841,19 @@ singleImages:
     changeFiles:
       - dockerfile-kasm-zsnes
       - src/ubuntu/install/zsnes/**
+  - name: forensic-osint
+    singleapp: false
+    base: core-ubuntu-jammy
+    dockerfile: dockerfile-kasm-forensic-osint
+    changeFiles:
+      - dockerfile-kasm-forensic-osint
+      - src/ubuntu/install/forensic_osint/**
+      - src/ubuntu/install/misc/**
+      - src/ubuntu/install/chrome/**
+      - src/ubuntu/install/vs_code/**
+      - src/ubuntu/install/only_office/**
+      - src/ubuntu/install/signal/**
+      - src/ubuntu/install/telegram/**
+      - src/ubuntu/install/thunderbird/**
+      - src/ubuntu/install/torbrowser/**
+      - src/ubuntu/install/cleanup/**
