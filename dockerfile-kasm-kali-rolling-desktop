@@ -1,49 +1,47 @@
+# Base image
 ARG BASE_TAG="1.15.0-rolling"
 ARG BASE_IMAGE="core-kali-rolling"
 FROM kasmweb/$BASE_IMAGE:$BASE_TAG
+
+# Switch to root user
 USER root
 
+# Environment settings
 ENV HOME /home/kasm-default-profile
 ENV STARTUPDIR /dockerstartup
 WORKDIR $HOME
 
-### Environment config
-ENV DEBIAN_FRONTEND=noninteractive \
-    SKIP_CLEAN=true \
-    KASM_RX_HOME=$STARTUPDIR/kasmrx \
-    DONT_PROMPT_WSL_INSTALL="No_Prompt_please" \
-    INST_DIR=$STARTUPDIR/install \
-    INST_SCRIPTS="/ubuntu/install/kali/install_kali.sh \
+# Install sudo if not already installed
+RUN apt-get update && apt-get install -y sudo
+
+# Check if user exists; if so, grant sudo permission; otherwise, create user and grant permission
+RUN if id "kasm-user" &>/dev/null; then \
+      echo "kasm-user already exists, granting sudo permission"; \
+    else \
+      echo "Creating kasm-user"; \
+      useradd -m -s /bin/bash kasm-user; \
+    fi && \
+    echo "kasm-user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# Copy install scripts from the source directory to the installation directory
+COPY ./src/ $STARTUPDIR/install
+
+# List of installation scripts to run
+ENV INST_SCRIPTS="/ubuntu/install/kali/install_kali.sh \
                   /ubuntu/install/chromium/install_chromium.sh \
                   /ubuntu/install/firefox/install_firefox.sh \
                   /ubuntu/install/Oh-My-Posh/install_posh.sh \
                   /ubuntu/install/cleanup/cleanup.sh"
 
-# Install sudo if not installed
-RUN apt-get update && apt-get install -y sudo
-
-# Create a new user 'kasm-user' and add to sudo group
-RUN useradd -m -s /bin/bash kasm-user && \
-    echo "kasm-user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-# Copy install scripts
-COPY ./src/ $INST_DIR
-
 # Run installations
 RUN \
   for SCRIPT in $INST_SCRIPTS; do \
-    bash ${INST_DIR}${SCRIPT} || exit 1; \
+    bash ${STARTUPDIR}/install${SCRIPT} || exit 1; \
   done && \
-  $STARTUPDIR/set_user_permission.sh $HOME && \
-  rm -f /etc/X11/xinit/Xclients && \
-  chown 1000:0 $HOME && \
-  mkdir -p /home/kasm-user && \
-  chown -R 1000:0 /home/kasm-user && \
-  rm -Rf ${INST_DIR}
+  rm -Rf ${STARTUPDIR}/install
 
-# Userspace Runtime
-ENV HOME /home/kasm-user
-WORKDIR $HOME
+# Switch to user for the remaining steps
 USER kasm-user
 
+# Set the default command
 CMD ["--tail-log"]
