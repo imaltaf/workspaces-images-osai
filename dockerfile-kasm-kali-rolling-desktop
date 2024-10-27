@@ -1,9 +1,10 @@
-ARG BASE_TAG="develop"
+# dockerfile-kasm-kali-rolling-desktop
+ARG BASE_TAG="1.15.0-rolling"
 ARG BASE_IMAGE="core-kali-rolling"
 FROM kasmweb/$BASE_IMAGE:$BASE_TAG
 USER root
 
-ENV HOME /home/kasm-default-profile
+ENV HOME /home/darkmechanic
 ENV STARTUPDIR /dockerstartup
 WORKDIR $HOME
 
@@ -22,9 +23,9 @@ ENV DEBIAN_FRONTEND=noninteractive \
 # Install sudo if not installed
 RUN apt-get update && apt-get install -y sudo
 
-# Create a new user 'kasm-user' and add to sudo group
-RUN useradd -m -s /bin/bash kasm-user && \
-    echo "kasm-user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+# Create a new user 'darkmechanic' and add to sudo group
+RUN useradd -m -s /bin/bash darkmechanic && \
+    echo "darkmechanic ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Copy install scripts
 COPY ./src/ $INST_DIR
@@ -37,13 +38,13 @@ RUN \
   $STARTUPDIR/set_user_permission.sh $HOME && \
   rm -f /etc/X11/xinit/Xclients && \
   chown 1000:0 $HOME && \
-  mkdir -p /home/kasm-user && \
-  chown -R 1000:0 /home/kasm-user && \
+  mkdir -p /home/darkmechanic && \
+  chown -R 1000:0 /home/darkmechanic && \
   rm -Rf ${INST_DIR}
 
 # Userspace Runtime
-ENV HOME /home/kasm-user
+ENV HOME /home/darkmechanic
 WORKDIR $HOME
-USER kasm-user
+USER darkmechanic
 
 CMD ["--tail-log"]
