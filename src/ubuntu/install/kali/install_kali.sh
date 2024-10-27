@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Install kali tools
+# Update package list and install Kali tools
 apt-get update
 apt-get install -y \
   kali-tools-top10 \
@@ -11,20 +11,20 @@ apt-get install -y \
   faraday \
   fern-wifi-cracker \
   guymager \
-  hydra-gtk \
+  hydra \  # Replaced hydra-gtk with hydra
   legion \
   ophcrack \
   ophcrack-cli \
   sqlitebrowser
 
-# Remove stuff we install later properly
+# Remove packages that will be installed separately
 apt-get purge -y \
   firefox-esr \
   chromium
 rm -f /usr/share/xfce4/panel/plugins/power-manager-plugin.desktop
 
-# Cleanup
-if [ -z ${SKIP_CLEAN+x} ]; then
+# Cleanup if SKIP_CLEAN is not set
+if [ -z "${SKIP_CLEAN+x}" ]; then
   apt-get autoclean
   rm -rf \
     /var/lib/apt/lists/* \
